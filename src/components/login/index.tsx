@@ -1,13 +1,11 @@
 import Cookies from "universal-cookie";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import useAxios from "../../hooks/useAxiosAuth";
 import jwt from "jwt-decode";
 import authInstance from "../../apis/auth";
 
 function Login() {
   const cookies = new Cookies();
-  const [login, setLogin] = useState("");
-  const [password, setPassword] = useState("");
   const [loginData, loginError, loginLoading, loginOperation] = useAxios({
     axiosInstance: authInstance,
     method: "post",

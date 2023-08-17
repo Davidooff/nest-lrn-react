@@ -1,12 +1,14 @@
 import Cookies from "universal-cookie";
 import jwt from "jwt-decode";
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 import useAxios from "./hooks/useAxiosAuth";
 import authInstance from "./apis/auth";
 
 import Ninjas from "./components/ninjas";
 import Login from "./components/login";
+
+export const RoleContext = createContext<null | number>(null);
 
 function App() {
   const cookies = new Cookies();
@@ -62,8 +64,10 @@ function App() {
 
   return (
     <div className="App">
-      {role !== null && <Ninjas />}
-      {role == null && <Login />}
+      <RoleContext.Provider value={role}>
+        {role !== null && <Ninjas />}
+        {role == null && <Login />}
+      </RoleContext.Provider>
     </div>
   );
 }
